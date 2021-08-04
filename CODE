@@ -1,0 +1,269 @@
+import 'package:flutter/material.dart';
+
+void main()=> runApp(MaterialApp(
+  home: SimpleCalculator(),
+));
+class SimpleCalculator extends StatefulWidget {
+  const SimpleCalculator({Key? key}) : super(key: key);
+
+  @override
+  _SimpleCalculatorState createState() => _SimpleCalculatorState();
+}
+
+class _SimpleCalculatorState extends State<SimpleCalculator> {
+ late int fN ;
+ late int sN;
+ late String history='';
+ late String display='';
+ late String res='';
+ late String op='';
+
+  void onClick(String btnVal){
+    print(btnVal);
+    if(btnVal=='C'){
+      display='';
+      fN=0;
+      sN=0;
+      res='';}
+    else if(btnVal=='AC'){
+      display='';
+      fN=0;
+      sN=0;
+      res='';
+      history='';}
+    else if(btnVal=='+'||btnVal=='-'||btnVal=='x'||btnVal=='/'){
+      fN=int.parse(display);
+      res='';
+      op=btnVal;}
+    else if(btnVal=='='){
+     sN=int.parse(display);
+      if(op=='+'){
+        res=(fN + sN).toString();
+        history=fN.toString()+op.toString()+sN.toString();
+      }
+
+      if(op=='-'){
+        res=(fN - sN).toString();
+        history=fN.toString()+op.toString()+sN.toString();
+      }
+
+      if(op=='x'){
+        res=(fN* sN).toString();
+        history=fN.toString()+op.toString()+sN.toString();
+      }
+
+      if(op=='/') {
+        res = (fN / sN).toString();
+        history = fN.toString() + op.toString() + sN.toString();
+      }
+    }
+
+    else {
+      res=int.parse(display+btnVal).toString();
+    }
+
+    setState(() {
+      display=res;
+    });
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(                                  //APP UI STARTS HERE
+      appBar: AppBar(
+        title: Text('Calculator'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          //Row -1
+        Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(
+                horizontal: 160.0, vertical: 10.0),
+            child: Text(history),
+            color: Colors.white,
+
+          ),
+          ],
+        ),
+          //Row0
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 160.0, vertical: 35.0),
+                  child: Text(display),
+                  color: Colors.white,
+
+
+
+              ),
+            ],
+          ),
+          //Row1
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('7'),
+                  child: Text('7'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                  
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('8'),
+                  child: Text('8'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('9'),
+                  child: Text('9'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('/'),
+                  child: Text('/'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          //Row2
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('4'),
+                  child: Text('4'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('5'),
+                  child: Text('5'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('6'),
+                  child: Text('6'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('x'),
+                  child: Text('x'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          //Row3
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('1'),
+                  child: Text('1'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('2'),
+                  child: Text('2'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('3'),
+                  child: Text('3'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('-'),
+                  child: Text('-'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          //Row4
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('C'),
+                  child: Text('C'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('AC'),
+                  child: Text('AC'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('0'),
+                  child: Text('0'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.amber,
+                ),
+              ),
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('+'),
+                  child: Text('+'),
+                  padding: EdgeInsets.all(35.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          //Row5
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              Container(
+                child: RaisedButton(onPressed: ()=>onClick('='),
+                  child: Text('='),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 160.0, vertical: 35.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+  }
+}
